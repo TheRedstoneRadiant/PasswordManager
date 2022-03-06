@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 
-import bcrypt, getpass
+from key.getkey import getkey
+from passwords.passwords import decrypt_passwords
 
-with open("key.dat", "rb") as file:
-    key = file.read()
+if __name__ == "__main__":
+    master_password = getkey()
 
-remaining_attempts = 2
-master_password = getpass.getpass("Master password: ").encode()
-
-while not bcrypt.checkpw(master_password, key):
-    if not remaining_attempts:
-        print("3 incorrect password attempts.")
+    if master_password is None:
         exit()
 
-    print("Sorry, try again.")
-    remaining_attempts -= 1
-    master_password = getpass.getpass("Master password: ").encode()
+    option = input("1. List a password\n2. Create a password\n> ").strip()
 
-
-print(master_password)
+    if option == "1":
+        passwords = decrypt_passwords(master_password)
+        print(passwords)
