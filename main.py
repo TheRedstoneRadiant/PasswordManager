@@ -9,7 +9,11 @@ if __name__ == "__main__":
     if master_password is None:
         exit()
 
-    option = input("1. List a password\n2. Create a password\n> ").strip()
+    option = input(
+"""
+1. List a password
+2. Create a password\n> """
+                  ).strip()
 
     if option == "1":
         passwords = decrypt_passwords(master_password)
