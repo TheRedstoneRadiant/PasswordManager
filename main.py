@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 
-from key.getkey import getkey
-from passwords.passwords import decrypt_passwords
+from key.getkey import load_key
 
 if __name__ == "__main__":
-    master_password = getkey()
+    try:
+        key = load_key()
 
-    if master_password is None:
+    except (FileNotFoundError, LoadKeyError):
+        key = generate_key(KEY_ROUNDS)
+
+    if not key:
         exit()
 
-    option = input(
-        """
-1. List a password
-2. Create a password
-> """
-    ).strip()
+#     option = input(
+#         """
+# 1. List a password
+# 2. Create a password
+# > """
+#     ).strip()
 
-    if option == "1":
-        passwords = decrypt_passwords(master_password)
-        print(passwords)
+#     if option == "1":
+#         passwords = decrypt_passwords(master_password)
+#         print(passwords)
