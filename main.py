@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from key.getkey import load_key, dump_key, generate_key
+from key.getkey import load_key, dump_key
+from key.generate import generate_key
 from key.login import prompt_login
 
 
